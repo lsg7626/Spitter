@@ -1,0 +1,14 @@
+e\g\spitter\store\SpitterRepository.class
+e\g\spitter\domain\Spitter.class
+e\g\spitter\config\SpittleFileInitializer.class
+e\g\spitter\config\WebConfig.class
+e\g\spitter\store\SpitterRepositoryLogic.class
+e\g\spitter\controller\SpittleController.class
+e\g\spitter\config\RootConfig.class
+e\g\spitter\store\SpittleRepository.class
+e\g\spitter\domain\Spittle.class
+e\g\spitter\controller\HomeController.class
+e\g\spitter\controller\SpitterController.class
+e\g\spitter\config\DataConfig.class
+e\g\spitter\store\SpittleRepositoryLogic.class
+e\g\spitter\config\SpitterWebInitializer.class

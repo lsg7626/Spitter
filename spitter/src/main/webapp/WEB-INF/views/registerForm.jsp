@@ -18,6 +18,7 @@
       <input type="submit" value="Register" />
     </sf:form> --%>
     <sf:form method="POST" commandName="spitter">
+    <sf:errors path="*" element="div" cssClass="errors" />
       <sf:label path="firstName" cssErrorClass="error">First Name</sf:label>:
       <sf:input path="firstName" cssErrorClass="error" /><br>
       <sf:label path="lastName" cssErrorClass="error">last Name</sf:label>:
