@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spittr</title>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/style.css}"></link>
+</head>
+  <body>
+    <h1>Your Profile</h1>
+		Username : <input th:value="*{spitter.username}" type="text" id="username"  readonly="readonly" /> <br/>
+		firstName : <input th:value="*{spitter.firstName}" type="text" id="firstName"  readonly="readonly" size="10"/>
+		lastName : <input th:value="*{spitter.lastName}" type="text" id="lastName"  readonly="readonly" size="10"/>
+	<img th:src="@{${'/ffffffffgggg.jpg'}}"/>
+  </body>
+</html>

@@ -3,10 +3,10 @@ package e.g.spitter.domain;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Spitter implements Serializable{
 	
@@ -29,8 +29,7 @@ public class Spitter implements Serializable{
 	@NotNull
 	@Size(min=2, max=30, message="{lastName.size}")
 	private String lastName;
-	
-	
+		
 	public Long getId() {
 		return id;
 	}

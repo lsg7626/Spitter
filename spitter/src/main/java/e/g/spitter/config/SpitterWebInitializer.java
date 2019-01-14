@@ -25,7 +25,7 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
   
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
-		registration.setMultipartConfig(new MultipartConfigElement("/tmp/spitter/uploads"));  
+		registration.setMultipartConfig(new MultipartConfigElement("/tmp/spitter/uploads", 2097152, 4194304, 0)); // 업로드 되는 파일의 크기를 2MB로 제한, 전체 요청의 크기를 4MB로 제한 
 	}
   
 	@Override

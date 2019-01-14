@@ -1,11 +1,15 @@
 package e.g.spitter.config;
 
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -30,6 +34,10 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 		return resolver;
 	}*/
+	@Bean
+	public MultipartResolver multipartResolver() throws IOException {
+		return new StandardServletMultipartResolver();
+	}
 	
 	@Bean
 	public ViewResolver viewResolver() { // 스프링 MVC의 ViewResolver 에 대한 구현

@@ -60,7 +60,12 @@ public class SpitterRepositoryLogic implements SpitterRepository{
 			else
 				index++;
 		}
-		
+		if(spitters.size() != 0 && spitters.get(0) != null) {
+			System.out.println("spitters 정상");
+		}
+		else {
+			System.out.println("비정상");
+		}
 		return spitters.get(index);
 	}
 	
@@ -68,11 +73,16 @@ public class SpitterRepositoryLogic implements SpitterRepository{
 		List<Spitter> spitters = null;
 		try {
 			in = new FileInputStream("c:/spittle/spitters.txt");
+			System.out.println("FileinputStream 통과");
 			bin = new BufferedInputStream(in);
+			System.out.println("bufferedinputstream 통과");
 			oin = new ObjectInputStream(bin);
-			
+			System.out.println("objectinputstream 통과");
 			spitters = (ArrayList<Spitter>)oin.readObject();
-			
+			if(spitters != null)
+				System.out.println("size : " + spitters.size());
+			else
+				System.out.println("spitters equals Null");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
