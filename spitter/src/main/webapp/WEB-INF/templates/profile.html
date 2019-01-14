@@ -8,6 +8,6 @@
 		Username : <input th:value="*{spitter.username}" type="text" id="username"  readonly="readonly" /> <br/>
 		firstName : <input th:value="*{spitter.firstName}" type="text" id="firstName"  readonly="readonly" size="10"/>
 		lastName : <input th:value="*{spitter.lastName}" type="text" id="lastName"  readonly="readonly" size="10"/>
-	<img th:src="@{${'/ffffffffgggg.jpg'}}"/>
+	<img th:src="@{${'/profilepicture/' + spitter.username + '.jpg'}}"/>
   </body>
 </html>

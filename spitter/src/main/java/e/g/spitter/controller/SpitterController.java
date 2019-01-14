@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import e.g.spitter.domain.Spitter;
 import e.g.spitter.store.SpitterRepository;
@@ -38,14 +39,16 @@ public class SpitterController {
 	 }
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processingRegistration(@Valid Spitter spitter, Errors errors, MultipartFile profilePicture) throws IllegalStateException, IOException { // Errors 파라미터가 검증될 @Valid 애너테이션이 붙어있는 파라미터 바로 다음에 있어야함
+	public String processingRegistration(@Valid Spitter spitter, Errors errors, MultipartHttpServletRequest req) throws IllegalStateException, IOException { // Errors 파라미터가 검증될 @Valid 애너테이션이 붙어있는 파라미터 바로 다음에 있어야함
 		if(errors.hasErrors()) {
 			return "registerForm";
 		}
 		spitterRepository.save(spitter);
-		
-		uploadFile(profilePicture, spitter.getUsername() + ".jpg");
-		System.out.println(profilePicture.getOriginalFilename());
+		String root = req.getSession().getServletContext().getRealPath("\\");
+        String url = root+"\\profilePicture\\" + spitter.getUsername() + ".jpg";
+        MultipartFile file = req.getFile("profilePicture");
+		uploadFile(file, url);
+		System.out.println(file.getOriginalFilename());
 		return "redirect:/spitter/" + spitter.getUsername();
 	}
 	
@@ -57,6 +60,7 @@ public class SpitterController {
 	}
 	
 	private void uploadFile(MultipartFile profilePicture, String url) throws IllegalStateException, IOException {
+		System.out.println(url);
 		profilePicture.transferTo(new File(url));
 	}
 }
