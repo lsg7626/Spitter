@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spittr</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/resources/style.css}"></link>
+	</head>
+	<body>
+		<!-- <div class="listTitle">
+      	<h1>Recent Spittles</h1>
+      	<span th:text="${#lists.size(spittleList)}">[Spittles size]</span>
+      	<ul class="spittleList" >
+	        <li th:each="spittle : ${spittleList}" th:text="${spittle.id}">
+	        	Spittle Message...
+		        <div class="spittleMessage">
+		        	<p th:text="{spittle.message} + 'Message'" />
+		        </div>
+		        	<div class="spittleTime" th:text="${spittle.time}">dd</div>
+		        	<div class="spittleLocation" th:text="${spittle.latitude}">dd</div>
+		     </li>
+      	</ul>
+    </div> -->
+    <div class="listTitle">
+        <h1>Recent Spittles</h1>
+        <ul class="spittleList">
+          <li th:each="spittle : ${spittleList}" 
+              th:id="'spittle_' + ${spittle.id}">
+            <div class="spittleMessage" th:text="${spittle.message}">Spittle message</div>
+            <div>
+              <span class="spittleTime" th:text="${spittle.time}">spittle timestamp</span>
+              <span class="spittleLocation" th:text="'{' + ${spittle.latitude} + ', ' + ${spittle.longitude} + ')'">lat, long</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+	</body>
+</html>
