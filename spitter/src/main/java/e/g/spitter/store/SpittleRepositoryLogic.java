@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -58,17 +59,26 @@ public class SpittleRepositoryLogic implements SpittleRepository {
 		for(Spittle s : spittles) {
 			if(s.getId() == spittleId)
 				break;
-			else
+			else 
 				index++;
 		}
-		Spittle spittle = spittles.get(index);
-		return spittle;
+		if(index < spittles.size()) {
+			Spittle spittle = spittles.get(index);
+			return spittle;
+		}
+		return null;
 	}
 	
 	@Override
 	public void save(Spittle spittle) {
 		List<Spittle> spittles = getSpittles();
+		Long id = Long.valueOf(spittles.size());
+		spittle.setId(id);
+		spittle.setTime(new Date());
+		spittle.setLatitude(33.3333333);
+		spittle.setLongitude(77.1234567);
 		spittles.add(spittle);
+		System.out.println(spittle.toString());
 		OutputStream out = null;
 		BufferedOutputStream bout = null;
 		ObjectOutputStream oout = null;
@@ -76,7 +86,6 @@ public class SpittleRepositoryLogic implements SpittleRepository {
 			out = new FileOutputStream("c:/spittle/spittles.txt");
 			bout = new BufferedOutputStream(out);
 			oout = new ObjectOutputStream(bout);
-			
 	        oout.writeObject(spittles);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

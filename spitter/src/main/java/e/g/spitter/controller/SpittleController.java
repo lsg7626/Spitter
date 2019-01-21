@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import e.g.spitter.domain.Spittle;
 import e.g.spitter.store.SpittleRepository;
 
 @Controller
@@ -47,9 +49,25 @@ public class SpittleController {
 	  //가장 깔끔하지만 플레이스홀더 ({, }) 와 파라미터 이름이 반드시 일치해야됨
 	  @RequestMapping(value="/{spittleId}", method=RequestMethod.GET) // spittles/show?spittleid=11 => spittles/11
 	  public String showSpittle(@PathVariable long spittleId, Model model) {
-		  model.addAttribute("spittle", spittleRepository.findOne(spittleId));
+		  Spittle spittle = spittleRepository.findOne(spittleId);
+		  if (spittle == null)
+			  throw new SpittleNotFoundException();
+		  model.addAttribute(spittle);
 		  return "spittle";
 	  }
 	  
+	  @RequestMapping(value="/{spittleId}", method=RequestMethod.POST)
+	  public String saveSpittle(Spittle spittle, Model model) {
+		  try {
+			spittleRepository.save(spittle);
+		  	return "redirect:/spittles";
+		  } catch (DuplicateSpittleException e) {
+			  return "error/duplicate";
+		  }
+	  }
 	  
+	  @ExceptionHandler (DuplicateSpittleException.class)
+	  public String handleDuplicateSpittle() {
+		  return "error/duplicate";
+	  }
 }

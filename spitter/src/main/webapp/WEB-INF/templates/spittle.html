@@ -5,10 +5,17 @@
 	</head>
 	<body>
 		<div class="spittleView">
-      <div class="spittleMessage"><p th:text="${spittle.message}" > </p></div>
-      <div>
-        <span class="spittleTime"><p th:text="${spittle.time}" > </p></span>
-      </div>
-    </div>
+	    	<div class="spittleMessage"><p th:text="${spittle.message}" > </p></div>
+	    	<div>
+	    		<span class="spittleTime"><p th:text="${spittle.time}" > </p></span>
+	    	</div>
+    	</div>
+    	
+    	<div>
+    		<form method="POST" th:object="${spittle}">
+				Write Spittle : <input type="text" th:field="*{message}" /><br/>
+				<input type="submit" value="Write" />
+			</form>
+    	</div>
 	</body>
 </html>

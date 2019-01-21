@@ -8,12 +8,15 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Spittle implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private final Long id;
-	private final String message;
-	private final Date time;
+	private Long id;
+	private String message;
+	private Date time;
   	private Double latitude;
   	private Double longitude;
 
+  public Spittle() {
+	// TODO Auto-generated constructor stub
+  }
   public Spittle(String message, Date time) {
     this(null, message, time, null, null);
   }
@@ -25,7 +28,9 @@ public class Spittle implements Serializable{
     this.longitude = longitude;
     this.latitude = latitude;
   }
-
+  	public void setTime(Date time) {
+  		this.time = time;
+  	}
 	public Double getLatitude() {
 		return latitude;
 	}
@@ -41,11 +46,15 @@ public class Spittle implements Serializable{
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getId() {
 		return id;
 	}
-	
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public String getMessage() {
 		return message;
 	}
