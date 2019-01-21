@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import e.g.spitter.domain.Spitter;
 import e.g.spitter.store.SpitterRepository;
@@ -39,7 +40,7 @@ public class SpitterController {
 	 }
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processingRegistration(@Valid Spitter spitter, Errors errors, MultipartHttpServletRequest req) throws IllegalStateException, IOException { // Errors 파라미터가 검증될 @Valid 애너테이션이 붙어있는 파라미터 바로 다음에 있어야함
+	public String processingRegistration(@Valid Spitter spitter, Errors errors, MultipartHttpServletRequest req, RedirectAttributes model) throws IllegalStateException, IOException { // Errors 파라미터가 검증될 @Valid 애너테이션이 붙어있는 파라미터 바로 다음에 있어야함
 		if(errors.hasErrors()) {
 			return "registerForm";
 		}
@@ -48,8 +49,9 @@ public class SpitterController {
         String url = root+"\\profilePicture\\" + spitter.getUsername() + ".jpg";
         MultipartFile file = req.getFile("profilePicture");
 		uploadFile(file, url);
-		System.out.println(file.getOriginalFilename());
-		return "redirect:/spitter/" + spitter.getUsername();
+		model.addAttribute("username", spitter.getUsername());
+		model.addFlashAttribute("spitter", spitter); // redirect시 username을 키로 넘겨주고  spitter 객체를 값으로 넘겨주어 addFlashAttribute()를 호출
+		return "redirect:/spitter/{username}";
 	}
 	
 	@RequestMapping(value="/{username}", method=RequestMethod.GET)
