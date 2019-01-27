@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" th:href="@{/resources/style.css}"></link>
 </head>
 <body>
+<div id="content">
+      <h1>Register</h1>
 	<form method="POST" th:object="${spitter}" enctype="multipart/form-data">
 		<div class="errors" th:if="${#fields.hasErrors('*')}">
 			<ul>
@@ -11,11 +13,6 @@
 					th:text="${err}">Input is incorrect</li>
 			</ul>
 		</div>
-		<label th:class="${#fields.hasErrors('firstName')}? 'error'">First Name</label> : 
-		<input type="text" th:field="*{firstName}" th:class="${#fields.hasErrors('firstName')}? 'error'" /><br/>
-		
-		<label th:class="${#fields.hasErrors('lastName')}? 'error'">last Name</label> : 
-		<input type="text" th:field="*{lastName}" th:class="${#fields.hasErrors('lastName')}? 'error'" /><br/>
 		
 		<label th:class="${#fields.hasErrors('username')}? 'error'">username</label> : 
 		<input type="text" th:field="*{username}" th:class="${#fields.hasErrors('username')}? 'error'" /><br/>
@@ -23,9 +20,19 @@
 		<label th:class="${#fields.hasErrors('password')}? 'error'">password</label> : 
 		<input type="password" th:field="*{password}" th:class="${#fields.hasErrors('password')}? 'error'" /><br/>
 		
+		<label>Full Name</label> 
+		<input type="text" th:field="*{fullName}" /><br/>
+				
+		<label>Email</label> : 
+		<input type="email" th:field="*{email}" /><br/>
+		
+		<label>Reception : </label>
+		<input type="checkbox" th:field="*{updateByEmail}" /><br/>
+		
 		<label>Profile Picture</label> :
 		<input type="file" name="profilePicture" accept="image/jpeg, image/png, image/gif" /><br/>
 		<input type="submit" value="Register" />
 	</form>
+	</div>
 </body>
 </html>

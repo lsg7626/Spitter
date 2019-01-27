@@ -1,18 +1,11 @@
 package e.g.spitter.domain;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.springframework.web.multipart.MultipartFile;
 
-public class Spitter implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-
-	private Long id;
+public class Spitter{	
 	
 	@NotNull
 	@Size(min=5, max=16, message="{username.size}")
@@ -22,21 +15,9 @@ public class Spitter implements Serializable{
 	@Size(min=5, max=25, message="{password.size}")
 	private String password;
 	
-	@NotNull
-	@Size(min=2, max=30, message="{firstName.size}")
-	private String firstName;
-	
-	@NotNull
-	@Size(min=2, max=30, message="{lastName.size}")
-	private String lastName;
-		
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private String fullName;
+	private String email;
+	private boolean updateByEmail;
 
 	public String getUsername() {
 		return username;
@@ -54,20 +35,30 @@ public class Spitter implements Serializable{
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	
+
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isUpdateByEmail() {
+		return updateByEmail;
+	}
+
+	public void setUpdateByEmail(boolean updateByEmail) {
+		this.updateByEmail = updateByEmail;
 	}
 
 	@Override
@@ -82,8 +73,8 @@ public class Spitter implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Spitter [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + "]";
+		return "Spitter [username=" + username + ", password=" + password + ", fullName=" + fullName
+				+ ", email=" + email + ", updateByEmail=" + updateByEmail + "]";
 	}
 	  
 }

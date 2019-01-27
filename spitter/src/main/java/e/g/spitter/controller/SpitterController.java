@@ -45,6 +45,7 @@ public class SpitterController {
 			return "registerForm";
 		}
 		spitterRepository.save(spitter);
+		System.out.println(spitter.getUsername() + "저장 완료");
 		String root = req.getSession().getServletContext().getRealPath("\\");
         String url = root+"\\profilePicture\\" + spitter.getUsername() + ".jpg";
         MultipartFile file = req.getFile("profilePicture");

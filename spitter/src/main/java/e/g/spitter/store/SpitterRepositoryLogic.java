@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import e.g.spitter.domain.Spitter;
 
-@Repository
 public class SpitterRepositoryLogic implements SpitterRepository{
 	
 	InputStream in = null;

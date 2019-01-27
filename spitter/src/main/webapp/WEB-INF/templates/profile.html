@@ -6,8 +6,10 @@
   <body>
     <h1>Your Profile</h1>
 		Username : <input th:value="*{spitter.username}" type="text" id="username"  readonly="readonly" /> <br/>
-		firstName : <input th:value="*{spitter.firstName}" type="text" id="firstName"  readonly="readonly" size="10"/>
-		lastName : <input th:value="*{spitter.lastName}" type="text" id="lastName"  readonly="readonly" size="10"/>
+		fullName : <input th:value="*{spitter.fullName}" type="text" id="fullName"  readonly="readonly" size="10"/> <br/>
+		email : <input th:value="*{spitter.email}" type="text" id="email"  readonly="readonly" size="20"/> <br/>
+		<p th:if="${spitter.updateByEmail}">Reception : Y</p>
+		<p th:unless="${spitter.updateByEmail}">Reception : N</p>
 	<img th:src="@{${'/profilepicture/' + spitter.username + '.jpg'}}"/>
   </body>
 </html>
